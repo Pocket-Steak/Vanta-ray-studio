@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Art Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+    <!-- UPDATED: Assuming styles.css is now in a 'css' folder for better organization -->
+    <link rel="stylesheet" href="css/styles.css"> 
 </head>
 <body>
 
@@ -14,15 +15,50 @@
     </header>
 
     <main class="gallery">
-        </main>
+        
+        <!-- Art Piece #1: Vibrant Landscape -->
+        <div class="art-item">
+            <a href="images/large/painting1.jpg" data-lightbox="gallery" data-etsy-url="https://www.etsy.com/listing/LANDSCAPE-LINK-1">
+                <img src="images/thumbnails/painting1.jpg" alt="A vibrant landscape painting in oil.">
+            </a>
+            <div class="item-info">
+                <h3>Vibrant Landscape</h3>
+                <p>Oil on canvas, 2024</p>
+            </div>
+        </div>
+
+        <!-- Art Piece #2: Abstract Form -->
+        <div class="art-item">
+            <a href="images/large/sculpture2.jpg" data-lightbox="gallery" data-etsy-url="https://www.etsy.com/listing/SCULPTURE-LINK-2">
+                <img src="images/thumbnails/sculpture2.jpg" alt="A modern ceramic sculpture with abstract form.">
+            </a>
+            <div class="item-info">
+                <h3>Abstract Form</h3>
+                <p>Ceramic, 2025</p>
+            </div>
+        </div>
+
+        <!-- Art Piece #3: Neon Portrait (Not for Sale) -->
+        <div class="art-item">
+            <a href="images/large/digital3.png" data-lightbox="gallery" data-etsy-url="#"> 
+                <img src="images/thumbnails/digital3.png" alt="A neon portrait of a woman.">
+            </a>
+            <div class="item-info">
+                <h3>Neon Portrait</h3>
+                <p>Digital Art, 2025 (Not For Sale)</p>
+            </div>
+        </div>
+
+    </main>
 
     <footer>
         <p>&copy; 2025 My Art. All rights reserved.</p>
     </footer>
 
+    <!-- Lightbox Element is kept outside main body/footer for positioning -->
     <div id="lightbox" class="lightbox">
         <span class="close-btn">&times;</span>
-        <img class="lightbox-content" id="lightbox-image" alt="">
+        <img class="lightbox-content" id="lightbox-image" alt="Enlarged Art View">
         <div class="lightbox-caption">
             <a id="etsy-link" href="#" target="_blank" class="etsy-button">Buy on Etsy</a>
         </div>
