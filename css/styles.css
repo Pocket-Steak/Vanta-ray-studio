@@ -50,6 +50,13 @@ header h1, header p {
     0 14px 40px rgba(0,0,0,.6);
   transition: transform 0.3s ease, box-shadow 0.3s ease, outline-color .3s ease;
   position: relative;
+
+  /* Center contents with even top/bottom space */
+  padding: 18px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* centers the image+caption block vertically */
+  gap: 12px;                /* space between image and caption */
 }
 .art-item:hover {
   transform: translateY(-5px) scale(1.03);
@@ -59,7 +66,7 @@ header h1, header p {
     0 24px 70px rgba(0,229,255,.18);
 }
 
-/* --- Uniform thumbnail frame --- */
+/* Uniform thumbnail frame (same size for all images) */
 .thumb{
   display:block;
   position:relative;
@@ -80,7 +87,7 @@ header h1, header p {
   box-shadow: 0 8px 40px rgba(0,0,0,.5);
 }
 
-/* (Keep for non-thumb images if you add any elsewhere) */
+/* (Fallback rule for any non-thumb images elsewhere) */
 .art-item img {
   width: 100%;
   height: auto;
@@ -90,13 +97,15 @@ header h1, header p {
 
 /* Captions */
 .item-info {
-  padding: 15px;
+  padding: 0;                /* card has padding already */
   text-align: center;
 }
 .item-info h3, .item-info p {
   color: var(--main-cyan);
   text-shadow: 0 0 2px var(--accent-glow), 0 0 10px rgba(0,229,255,.18);
 }
+.item-info h3 { margin: 2px 0 6px; }
+.item-info p  { margin: 0; }
 
 /* Lightbox */
 .lightbox {
