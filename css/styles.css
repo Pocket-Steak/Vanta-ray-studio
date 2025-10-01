@@ -1,39 +1,36 @@
 :root {
-    /* Color Palette */
-    --bg-color: #1a001a;       /* Deep space purple background */
-    --text-color: #ffffff;     /* Bright white text */
-    --main-purple: #e069ff;    /* Primary neon purple */
-    --accent-glow: #d82ff7;    /* Secondary, brighter glow color */
-    --item-bg: rgba(255, 255, 255, 0.05); /* Slightly transparent background for art cards */
+    --bg-color: #1a001a;
+    --text-color: #ffffff;
+    --main-purple: #e069ff; /* Bright purple */
+    --accent-glow: #d82ff7; /* Intense magenta-purple glow */
+    --item-bg: rgba(255, 255, 255, 0.05); /* Slightly transparent background for art items */
 }
 
-/* --- Base Styles --- */
 body {
     font-family: 'Arial', sans-serif;
+    /* Set the dark background */
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;
     line-height: 1.6;
 }
 
-/* --- Header & Title --- */
 header {
     text-align: center;
     padding: 40px 20px;
     background-color: #000;
+    /* Neon pulsing shadow effect */
     box-shadow: 0 0 20px var(--accent-glow);
-    /* Simple animation to make the header pulse */
-    animation: glow-pulse 3s infinite ease-in-out; 
+    animation: glow-pulse 3s infinite ease-in-out;
 }
 
 header h1, header p {
-    /* Neon glow effect on text */
-    text-shadow: 0 0 5px var(--text-color), 0 0 10px var(--main-purple); 
+    /* Glowing text effect for high contrast */
+    text-shadow: 0 0 5px var(--text-color), 0 0 10px var(--main-purple);
 }
 
-/* --- Gallery Layout --- */
 .gallery {
-    /* Responsive Grid: displays items in a grid that adjusts based on screen size */
+    /* Responsive grid for the art pieces */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
@@ -42,7 +39,6 @@ header h1, header p {
     margin: auto;
 }
 
-/* --- Individual Art Item --- */
 .art-item {
     background-color: var(--item-bg);
     border-radius: 8px;
@@ -51,8 +47,8 @@ header h1, header p {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Hover Effect: Lifts the card and increases the glow */
 .art-item:hover {
+    /* Lift and intensify glow on hover */
     transform: translateY(-5px) scale(1.05);
     box-shadow: 0 0 20px var(--main-purple), 0 0 40px var(--accent-glow);
 }
@@ -69,15 +65,14 @@ header h1, header p {
     text-align: center;
 }
 
-/* Item Text Styling */
 .item-info h3, .item-info p {
     color: var(--main-purple);
     text-shadow: 0 0 5px var(--accent-glow);
 }
 
-/* --- Lightbox / Pop-up Window --- */
+/* Lightbox styles (the pop-up view) */
 .lightbox {
-    display: none; /* CRITICAL FIX: Ensures the lightbox is hidden by default */
+    display: none; /* CRITICAL: Hides the lightbox by default */
     position: fixed;
     z-index: 1000;
     padding-top: 50px;
@@ -86,7 +81,7 @@ header h1, header p {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.95); /* Semi-transparent black overlay */
+    background-color: rgba(0,0,0,0.95);
     backdrop-filter: blur(5px);
     animation: fadeIn 0.5s;
 }
@@ -105,7 +100,6 @@ header h1, header p {
     padding: 10px 0;
 }
 
-/* --- Etsy Button Style --- */
 .etsy-button {
     background-color: var(--main-purple);
     color: var(--text-color);
@@ -124,7 +118,6 @@ header h1, header p {
     box-shadow: 0 0 15px var(--accent-glow);
 }
 
-/* --- Close Button --- */
 .close-btn {
     position: absolute;
     top: 15px;
@@ -141,17 +134,16 @@ header h1, header p {
     color: var(--accent-glow);
 }
 
-/* --- Footer --- */
+/* Footer style to match the dark theme */
 footer {
     text-align: center;
     padding: 20px;
-    margin-top: 40px;
-    border-top: 1px solid rgba(224, 105, 255, 0.2);
-    color: rgba(255, 255, 255, 0.7);
+    background-color: #000;
+    border-top: 1px solid var(--accent-glow);
+    color: #aaa;
 }
 
 
-/* --- Animations --- */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -159,5 +151,5 @@ footer {
 
 @keyframes glow-pulse {
     0%, 100% { box-shadow: 0 0 20px var(--accent-glow); }
-    50% { box-shadow: 0 0 40px var(--accent-glow); } /* Pulses brighter at 50% */
+    50% { box-shadow: 0 0 40px var(--accent-glow); }
 }
