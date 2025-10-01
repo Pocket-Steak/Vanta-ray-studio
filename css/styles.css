@@ -1,9 +1,9 @@
 :root {
-  --bg-color: #06080b;           /* deep black-blue */
-  --text-color: #e8faff;         /* icy white/cyan */
-  --main-cyan: #00e5ff;          /* neon cyan */
-  --accent-glow: #7af0ff;        /* soft outer glow cyan */
-  --item-bg: rgba(0, 229, 255, 0.04); /* slight cyan-tinted panel */
+  --bg-color: #06080b;                 /* deep black-blue */
+  --text-color: #e8faff;               /* icy white/cyan */
+  --main-cyan: #00e5ff;                /* neon cyan */
+  --accent-glow: #7af0ff;              /* soft outer glow cyan */
+  --item-bg: rgba(0, 229, 255, 0.04);  /* slight cyan-tinted panel */
 }
 
 body {
@@ -14,6 +14,7 @@ body {
   line-height: 1.6;
 }
 
+/* Header */
 header {
   text-align: center;
   padding: 40px 20px;
@@ -22,15 +23,14 @@ header {
   animation: glow-pulse 3s infinite ease-in-out;
   border-bottom: 1px solid rgba(0,229,255,.18);
 }
-
 header h1, header p {
-  /* Neon cyan title glow */
   text-shadow:
     0 0 6px var(--text-color),
     0 0 12px var(--main-cyan),
     0 0 22px var(--accent-glow);
 }
 
+/* Grid */
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -40,18 +40,17 @@ header h1, header p {
   margin: auto;
 }
 
+/* Card */
 .art-item {
   background-color: var(--item-bg);
   border-radius: 12px;
   overflow: hidden;
-  /* subtle cyan edge + drop glow */
   box-shadow:
     0 0 0 1px rgba(0,229,255,.25),
     0 14px 40px rgba(0,0,0,.6);
   transition: transform 0.3s ease, box-shadow 0.3s ease, outline-color .3s ease;
   position: relative;
 }
-
 .art-item:hover {
   transform: translateY(-5px) scale(1.03);
   box-shadow:
@@ -60,27 +59,46 @@ header h1, header p {
     0 24px 70px rgba(0,229,255,.18);
 }
 
+/* --- Uniform thumbnail frame --- */
+.thumb{
+  display:block;
+  position:relative;
+  width:100%;
+  aspect-ratio: 4 / 5;       /* change to 1 / 1 for squares if you prefer */
+  overflow:hidden;
+  border-radius:10px;
+}
+.thumb img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;          /* crops to fill uniformly */
+  object-position:center;
+  border-radius:10px;
+  outline: 1px solid rgba(0,229,255,.25);
+  box-shadow: 0 8px 40px rgba(0,0,0,.5);
+}
+
+/* (Keep for non-thumb images if you add any elsewhere) */
 .art-item img {
   width: 100%;
   height: auto;
   display: block;
   cursor: pointer;
-  border-radius: 10px;
-  outline: 1px solid rgba(0,229,255,.25);
-  box-shadow: 0 8px 40px rgba(0,0,0,.5);
 }
 
+/* Captions */
 .item-info {
   padding: 15px;
   text-align: center;
 }
-
 .item-info h3, .item-info p {
   color: var(--main-cyan);
   text-shadow: 0 0 2px var(--accent-glow), 0 0 10px rgba(0,229,255,.18);
 }
 
-/* Lightbox styles */
+/* Lightbox */
 .lightbox {
   display: none; /* hidden by default */
   position: fixed;
@@ -94,7 +112,6 @@ header h1, header p {
   animation: fadeIn 0.5s;
   border: 0;
 }
-
 .lightbox-content {
   margin: auto;
   display: block;
@@ -107,13 +124,13 @@ header h1, header p {
     0 28px 100px rgba(0,229,255,.25),
     0 40px 80px rgba(0,0,0,.6);
 }
-
 .lightbox-caption {
   text-align: center;
   color: var(--text-color);
   padding: 10px 0;
 }
 
+/* CTA button */
 .etsy-button {
   background-color: var(--main-cyan);
   color: #052026;
@@ -130,7 +147,6 @@ header h1, header p {
   display: inline-block;
   border: 1px solid rgba(0,229,255,.55);
 }
-
 .etsy-button:hover {
   background-color: var(--accent-glow);
   transform: translateY(-1px) scale(1.04);
@@ -139,6 +155,7 @@ header h1, header p {
     0 0 36px rgba(122,240,255,.45);
 }
 
+/* Close */
 .close-btn {
   position: absolute;
   top: 15px; right: 35px;
@@ -149,7 +166,6 @@ header h1, header p {
   cursor: pointer;
   text-shadow: 0 0 10px var(--main-cyan);
 }
-
 .close-btn:hover { color: var(--main-cyan); }
 
 /* Footer */
@@ -165,7 +181,6 @@ footer {
 @keyframes fadeIn {
   from { opacity: 0; } to { opacity: 1; }
 }
-
 @keyframes glow-pulse {
   0%, 100% { box-shadow: 0 0 22px var(--accent-glow), 0 0 60px rgba(0,229,255,.15); }
   50%      { box-shadow: 0 0 44px var(--accent-glow), 0 0 90px rgba(0,229,255,.22); }
