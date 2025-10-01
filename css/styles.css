@@ -1,5 +1,5 @@
 :root {
-    --bg-color: #1a001a;
+    --bg-color: #1a001a; /* Dark, almost black background for contrast */
     --text-color: #ffffff;
     --main-purple: #e069ff; /* Bright purple */
     --accent-glow: #d82ff7; /* Intense magenta-purple glow */
@@ -8,7 +8,6 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    /* Set the dark background */
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;
@@ -19,18 +18,16 @@ header {
     text-align: center;
     padding: 40px 20px;
     background-color: #000;
-    /* Neon pulsing shadow effect */
     box-shadow: 0 0 20px var(--accent-glow);
     animation: glow-pulse 3s infinite ease-in-out;
 }
 
 header h1, header p {
-    /* Glowing text effect for high contrast */
-    text-shadow: 0 0 5px var(--text-color), 0 0 10px var(--main-purple);
+    /* Intense neon glow on the main title */
+    text-shadow: 0 0 5px var(--text-color), 0 0 10px var(--main-purple), 0 0 20px var(--accent-glow);
 }
 
 .gallery {
-    /* Responsive grid for the art pieces */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
@@ -48,7 +45,6 @@ header h1, header p {
 }
 
 .art-item:hover {
-    /* Lift and intensify glow on hover */
     transform: translateY(-5px) scale(1.05);
     box-shadow: 0 0 20px var(--main-purple), 0 0 40px var(--accent-glow);
 }
@@ -67,7 +63,8 @@ header h1, header p {
 
 .item-info h3, .item-info p {
     color: var(--main-purple);
-    text-shadow: 0 0 5px var(--accent-glow);
+    /* Reduced the glow for sharper detail text */
+    text-shadow: 0 0 2px var(--accent-glow);
 }
 
 /* Lightbox styles (the pop-up view) */
@@ -134,7 +131,7 @@ header h1, header p {
     color: var(--accent-glow);
 }
 
-/* Footer style to match the dark theme */
+/* Footer style to match the dark theme and keep text sharp */
 footer {
     text-align: center;
     padding: 20px;
