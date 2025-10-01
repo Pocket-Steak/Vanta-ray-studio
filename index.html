@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Art Portfolio</title>
-    <!-- FIX: Updated path to match your folder 'css' and file 'style.css' (singular) -->
-    <link rel="stylesheet" href="css/style.css"> 
+    <!-- FIX 1: Corrected CSS file name from 'style.css' to 'styles.css' -->
+    <link rel="stylesheet" href="css/styles.css"> 
 </head>
 <body>
 
@@ -18,9 +18,9 @@
         
         <!-- Art Piece 1: duck.jpg -->
         <div class="art-item">
-            <!-- NOTE: Paths updated to use 'Images' (capital I) and assumed 'thumbnails/large' subfolders -->
-            <a href="Images/large/duck.jpg" data-lightbox="gallery" data-etsy-url="https://www.etsy.com/listing/DUCK-LINK">
-                <img src="Images/thumbnails/duck.jpg" alt="A whimsical portrait of a duck.">
+            <!-- FIX 2: Added a leading '/' to paths to make them absolute, which can sometimes fix image loading issues on GitHub Pages -->
+            <a href="/images/large/duck.jpg" data-lightbox="gallery" data-etsy-url="https://www.etsy.com/listing/DUCK-LINK">
+                <img src="/images/thumbnails/duck.jpg" alt="A whimsical portrait of a duck.">
             </a>
             <div class="item-info">
                 <h3>The Cosmic Duck</h3>
@@ -30,8 +30,8 @@
 
         <!-- Art Piece 2: heyhey.jpg -->
         <div class="art-item">
-            <a href="Images/large/heyhey.jpg" data-lightbox="gallery" data-etsy-url="https://www.etsy.com/listing/HEYHEY-LINK">
-                <img src="Images/thumbnails/heyhey.jpg" alt="A playful abstract piece.">
+            <a href="/images/large/heyhey.jpg" data-lightbox="gallery" data-etsy-url="https://www.etsy.com/listing/HEYHEY-LINK">
+                <img src="/images/thumbnails/heyhey.jpg" alt="A playful abstract piece.">
             </a>
             <div class="item-info">
                 <h3>Hey Hey Blue</h3>
@@ -41,8 +41,8 @@
 
         <!-- Art Piece 3: Witchking.jpg -->
         <div class="art-item">
-            <a href="Images/large/Witchking.jpg" data-lightbox="gallery" data-etsy-url="#"> 
-                <img src="Images/thumbnails/Witchking.jpg" alt="A fierce depiction of a dark fantasy character.">
+            <a href="/images/large/Witchking.jpg" data-lightbox="gallery" data-etsy-url="#"> 
+                <img src="/images/thumbnails/Witchking.jpg" alt="A fierce depiction of a dark fantasy character.">
             </a>
             <div class="item-info">
                 <h3>The Witch King</h3>
