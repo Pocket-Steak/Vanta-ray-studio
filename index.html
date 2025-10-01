@@ -1,70 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Art Portfolio</title>
-    <!-- Correct Link to CSS folder -->
-    <link rel="stylesheet" href="css/styles.css"> 
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Art Portfolio</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
+  <header>
+    <h1>My Art Portfolio</h1>
+    <p>A collection of my work.</p>
+  </header>
 
-    <header>
-        <h1>My Art Portfolio</h1>
-        <p>A collection of my work.</p>
-    </header>
-
-    <main class="gallery">
-        
-        <!-- Art Piece 1: duck.jpg -->
-        <div class="art-item">
-            <a href="images/large/duck.jpg" data-lightbox="gallery" data-etsy-url="https://www.etsy.com/listing/DUCK-LINK">
-                <img src="images/thumbnails/duck.jpg" alt="A whimsical portrait of a duck.">
-            </a>
-            <div class="item-info">
-                <h3>The Cosmic Duck</h3>
-                <p>Digital Painting, 2024</p>
-            </div>
-        </div>
-
-        <!-- Art Piece 2: heyhey.jpg -->
-        <div class="art-item">
-            <a href="images/large/heyhey.jpg" data-lightbox="gallery" data-etsy-url="https://www.etsy.com/listing/HEYHEY-LINK">
-                <img src="images/thumbnails/heyhey.jpg" alt="A playful abstract piece.">
-            </a>
-            <div class="item-info">
-                <h3>Hey Hey Blue</h3>
-                <p>Acrylic on Canvas, 2023</p>
-            </div>
-        </div>
-
-        <!-- Art Piece 3: Witchking.jpg -->
-        <div class="art-item">
-            <a href="images/large/Witchking.jpg" data-lightbox="gallery" data-etsy-url="#"> 
-                <img src="images/thumbnails/Witchking.jpg" alt="A fierce depiction of a dark fantasy character.">
-            </a>
-            <div class="item-info">
-                <h3>The Witch King</h3>
-                <p>Ink and Digital (Not For Sale)</p>
-            </div>
-        </div>
-
-    </main>
-
-    <footer>
-        <p>&copy; 2025 My Art. All rights reserved.</p>
-    </footer>
-
-    <!-- Lightbox Element -->
-    <div id="lightbox" class="lightbox">
-        <span class="close-btn">&times;</span>
-        <img class="lightbox-content" id="lightbox-image" alt="Enlarged Art View">
-        <div class="lightbox-caption">
-            <a id="etsy-link" href="#" target="_blank" class="etsy-button">Buy on Etsy</a>
-        </div>
+  <main class="gallery">
+    <!-- Art Piece 1: duck.jpg -->
+    <div class="art-item">
+      <a class="thumb" href="images/large/duck.jpg" data-lightbox="gallery" data-etsy-url="https://www.etsy.com/listing/DUCK-LINK">
+        <img src="images/thumbnails/duck.jpg" alt="A whimsical portrait of a duck." />
+      </a>
+      <div class="item-info">
+        <h3>The Cosmic Duck</h3>
+        <p>Digital Painting, 2024</p>
+      </div>
     </div>
 
-    <!-- Correct Link to JS folder -->
-    <script src="js/script.js"></script> 
+    <!-- Art Piece 2: heyhey.jpg -->
+    <div class="art-item">
+      <a class="thumb" href="images/large/heyhey.jpg" data-lightbox="gallery" data-etsy-url="https://www.etsy.com/listing/HEYHEY-LINK">
+        <img src="images/thumbnails/heyhey.jpg" alt="A playful abstract piece." />
+      </a>
+      <div class="item-info">
+        <h3>Hey Hey Blue</h3>
+        <p>Acrylic on Canvas, 2023</p>
+      </div>
+    </div>
+
+    <!-- Art Piece 3: Witchking.jpg -->
+    <div class="art-item">
+      <a class="thumb" href="images/large/Witchking.jpg" data-lightbox="gallery" data-etsy-url="#">
+        <img src="images/thumbnails/Witchking.jpg" alt="A fierce depiction of a dark fantasy character." />
+      </a>
+      <div class="item-info">
+        <h3>The Witch King</h3>
+        <p>Ink and Digital (Not For Sale)</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 My Art. All rights reserved.</p>
+  </footer>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <span class="close-btn">&times;</span>
+    <img class="lightbox-content" id="lightbox-image" alt="Enlarged Art View" />
+    <div class="lightbox-caption">
+      <a id="etsy-link" href="#" target="_blank" class="etsy-button">Buy on Etsy</a>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
 </body>
 </html>
