@@ -51,12 +51,8 @@ header h1, header p {
   transition: transform 0.3s ease, box-shadow 0.3s ease, outline-color .3s ease;
   position: relative;
 
-  /* Center contents with even top/bottom space */
+  /* fixed inner padding so image isn't glued to the top/bottom */
   padding: 18px 16px 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;  /* centers the image+caption block vertically */
-  gap: 12px;                /* space between image and caption */
 }
 .art-item:hover {
   transform: translateY(-5px) scale(1.03);
@@ -74,6 +70,9 @@ header h1, header p {
   aspect-ratio: 1 / 1;       /* change to 1 / 1 for squares if you prefer */
   overflow:hidden;
   border-radius:10px;
+
+  /* exact distance from image to caption */
+  margin-bottom: 14px;
 }
 .thumb img{
   position:absolute;
@@ -96,15 +95,12 @@ header h1, header p {
 }
 
 /* Captions */
-.item-info {
-  padding: 0;                /* card has padding already */
-  text-align: center;
-}
+.item-info { padding: 0; text-align: center; }
 .item-info h3, .item-info p {
   color: var(--main-cyan);
   text-shadow: 0 0 2px var(--accent-glow), 0 0 10px rgba(0,229,255,.18);
 }
-.item-info h3 { margin: 2px 0 6px; }
+.item-info h3 { margin: 0 0 6px; }
 .item-info p  { margin: 0; }
 
 /* Lightbox */
