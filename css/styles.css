@@ -6,7 +6,7 @@
   --item-bg:rgba(0,229,255,.04);
 
   /* Gallery controls */
-  --thumb-aspect: 1 / 1;      /* 1/1 = square, change to 4/5 for portrait tiles */
+  --thumb-aspect: 1 / 1;      /* 1/1 = square; change to 4/5 for portrait tiles */
   --img-to-title-gap: 16px;    /* exact distance from image bottom to title */
 }
 
@@ -20,22 +20,26 @@ body{
 }
 
 /* =========================================================
-   HERO (PocketSteak-style, cyan) — single-line title
+   HERO (centered group, same width as gallery)
    ========================================================= */
 .hero{
   background: radial-gradient(1200px 600px at 20% -300px, rgba(0,229,255,.08), transparent 60%), #000;
   border-bottom:1px solid rgba(0,229,255,.18);
   box-shadow: 0 0 22px rgba(122,240,255,.22), 0 0 60px rgba(0,229,255,.10);
 }
+
+/* Same max width & side padding as the gallery, contents centered */
 .hero-inner{
-  max-width: 1200px;
+  max-width: 1200px;                 /* matches .gallery max-width */
   margin: 0 auto;
-  padding: clamp(28px, 6vw, 64px) 16px;
+  padding: clamp(28px, 6vw, 64px) 20px;  /* side padding = 20px to align with gallery */
   display: grid;
-  grid-template-columns: auto 1fr;   /* logo | title */
+  grid-template-columns: auto auto;  /* logo | title sized to content */
   gap: clamp(16px, 4vw, 48px);
+  justify-content: center;           /* center the pair as a group */
   align-items: center;
 }
+
 .hero-logo{
   width: clamp(96px, 18vw, 260px);
   height: clamp(96px, 18vw, 260px);
@@ -46,12 +50,14 @@ body{
   outline: 1px solid rgba(0,229,255,.35);
   box-shadow: 0 0 24px rgba(0,229,255,.25), inset 0 0 0 1px rgba(0,229,255,.1);
 }
+
 .hero-title{
   margin: 0;
   font-weight: 900;
   line-height: .95;
-  font-size: clamp(40px, 10vw, 160px);  /* big like PocketSteak */
-  white-space: nowrap;                   /* keep on one line */
+  font-size: clamp(40px, 10vw, 160px);
+  white-space: nowrap;               /* keep on one line */
+  text-align: center;
 
   /* Cyan gradient text + glow */
   background: linear-gradient(180deg, #e8faff 0%, #abf6ff 40%, #00e5ff 80%);
@@ -62,9 +68,14 @@ body{
     0 0 20px rgba(0,229,255,.25),
     0 0 60px rgba(0,229,255,.18);
 }
-/* Mobile: stack but keep title single-line by shrinking it */
+
+/* Mobile: stack logo above title and shrink to fit */
 @media (max-width: 720px){
-  .hero-inner{ grid-template-columns: 1fr; justify-items:center; text-align:center; }
+  .hero-inner{
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
   .hero-title{ font-size: clamp(32px, 12vw, 64px); }
 }
 
