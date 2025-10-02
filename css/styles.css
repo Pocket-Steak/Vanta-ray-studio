@@ -71,7 +71,7 @@ header h1, header p {
   display:block;
   position:relative;
   width:100%;
-  aspect-ratio: 4 / 5;       /* change to 1 / 1 for squares if you prefer */
+  aspect-ratio: 1 / 1;       /* change to 1 / 1 for squares if you prefer */
   overflow:hidden;
   border-radius:10px;
 }
