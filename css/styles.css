@@ -6,10 +6,11 @@
   --item-bg:rgba(0,229,255,.04);
 
   /* Gallery controls */
-  --thumb-aspect: 1 / 1;          /* set 1/1 for squares, 4/5 for portrait tiles */
+  --thumb-aspect: 1 / 1;          /* 1/1 square, use 4/5 for portrait tiles */
   --img-to-title-gap: 16px;        /* exact distance from image to title */
 }
 
+/* Base */
 body{
   font-family: Arial, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background: var(--bg-color);
@@ -18,36 +19,66 @@ body{
   line-height:1.6;
 }
 
-/* ===== Brand header (scoped; won’t touch gallery) ===== */
-.site-header{
-  background:#000;
+/* =========================================================
+   HERO (PocketSteak-style, cyan)
+   ========================================================= */
+.hero{
+  background: radial-gradient(1200px 600px at 20% -300px, rgba(0,229,255,.08), transparent 60%), #000;
   border-bottom:1px solid rgba(0,229,255,.18);
-  box-shadow:0 0 22px rgba(122,240,255,.22), 0 0 60px rgba(0,229,255,.10);
+  box-shadow: 0 0 22px rgba(122,240,255,.22), 0 0 60px rgba(0,229,255,.10);
 }
-.header-wrap{
-  max-width:1200px; margin:0 auto;
-  padding:12px 16px;
-  display:flex; align-items:center; gap:12px;
-  background: linear-gradient(180deg, rgba(0,229,255,.06), rgba(0,229,255,.03));
-  outline:1px solid rgba(0,229,255,.18);
-  border-radius:14px;
+.hero-inner{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(28px, 6vw, 64px) 16px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(16px, 4vw, 48px);
+  align-items: center;
 }
-.brand-logo{
-  width:56px; height:56px; object-fit:contain;
-  background:#061014; border-radius:10px; padding:6px;
-  outline:1px solid rgba(0,229,255,.35);
-  box-shadow:0 0 16px rgba(0,229,255,.22);
+.hero-logo{
+  width: clamp(96px, 18vw, 260px);
+  height: clamp(96px, 18vw, 260px);
+  object-fit: contain;
+  background:#061014;
+  border-radius: 20px;
+  padding: clamp(8px, 1.2vw, 12px);
+  outline: 1px solid rgba(0,229,255,.35);
+  box-shadow: 0 0 24px rgba(0,229,255,.25), inset 0 0 0 1px rgba(0,229,255,.1);
 }
-.brand-copy{display:flex; flex-direction:column;}
-.brand-title{
-  margin:0; font-weight:800; line-height:1.1;
-  font-size: clamp(24px, 4vw, 34px);
-  color:var(--text-color);
-  text-shadow:0 0 6px var(--text-color), 0 0 14px var(--main-cyan), 0 0 26px var(--accent-glow);
-}
-.brand-tag{margin:2px 0 0; color:#b7d7de}
+.hero-text{ display:flex; flex-direction:column; }
 
-/* ===== Gallery grid ===== */
+.hero-title{
+  margin: 0 0 clamp(6px, 1.5vw, 12px);
+  font-weight: 900;
+  line-height: .95;
+  /* Big like PocketSteak */
+  font-size: clamp(40px, 10vw, 160px);
+
+  /* Cyan gradient text + glow */
+  background: linear-gradient(180deg, #e8faff 0%, #abf6ff 40%, #00e5ff 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow:
+    0 0 20px rgba(0,229,255,.25),
+    0 0 60px rgba(0,229,255,.18);
+}
+.hero-sub{
+  margin: 0;
+  color: #cfe9ef;
+  font-size: clamp(16px, 3.2vw, 44px);
+  text-shadow: 0 0 10px rgba(0,229,255,.2);
+}
+
+/* Mobile: stack logo above text */
+@media (max-width: 720px){
+  .hero-inner{ grid-template-columns: 1fr; justify-items: center; text-align:center; }
+}
+
+/* =========================================================
+   GALLERY
+   ========================================================= */
 .gallery{
   display:grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -58,11 +89,11 @@ body{
   align-items:start; /* keep each card’s height independent */
 }
 
-/* ===== Card ===== */
+/* Card */
 .art-item{
   background:var(--item-bg);
   border-radius:12px;
-  padding:16px;              /* space inside the card top/bottom */
+  padding:16px;              /* space inside the card */
   box-shadow:
     0 0 0 1px rgba(0,229,255,.24),
     0 14px 40px rgba(0,0,0,.6);
@@ -76,7 +107,7 @@ body{
     0 24px 70px rgba(0,229,255,.16);
 }
 
-/* === Uniform thumbnail frame (small, consistent tiles) === */
+/* Uniform thumbnail frame */
 .art-item > a.thumb{
   display:block;
   position:relative;
@@ -97,7 +128,7 @@ body{
   box-shadow:0 8px 36px rgba(0,0,0,.55);
 }
 
-/* Fallback rule (kept narrow so it doesn't blow up sizes) */
+/* Fallback for any non-thumb images directly inside card */
 .art-item > img { width:100%; height:auto; display:block; }
 
 /* Captions */
@@ -109,7 +140,9 @@ body{
 .item-info h3{ margin:0 0 6px; }
 .item-info p { margin:0; }
 
-/* ===== Lightbox ===== */
+/* =========================================================
+   LIGHTBOX / BUTTON / FOOTER
+   ========================================================= */
 .lightbox{
   display:none; position:fixed; inset:0; z-index:1000;
   padding-top:50px; overflow:auto;
@@ -122,7 +155,6 @@ body{
 }
 .lightbox-caption{ text-align:center; color:var(--text-color); padding:10px 0; }
 
-/* Button */
 .etsy-button{
   background:var(--main-cyan); color:#052026;
   padding:10px 20px; border-radius:999px; text-decoration:none; font-weight:700;
@@ -136,14 +168,12 @@ body{
   box-shadow:0 0 14px var(--accent-glow), 0 0 36px rgba(122,240,255,.45);
 }
 
-/* Close */
 .close-btn{
   position:absolute; top:15px; right:35px;
   color:var(--text-color); font-size:40px; font-weight:bold; cursor:pointer;
   text-shadow:0 0 10px var(--main-cyan);
 }
 
-/* Footer */
 footer{
   text-align:center; padding:20px; background:#000;
   border-top:1px solid rgba(0,229,255,.25); color:#b7d7de;
