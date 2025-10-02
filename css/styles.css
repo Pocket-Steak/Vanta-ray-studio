@@ -6,8 +6,8 @@
   --item-bg:rgba(0,229,255,.04);
 
   /* Gallery controls */
-  --thumb-aspect: 1 / 1;          /* 1/1 square, use 4/5 for portrait tiles */
-  --img-to-title-gap: 16px;        /* exact distance from image to title */
+  --thumb-aspect: 1 / 1;      /* 1/1 = square, change to 4/5 for portrait tiles */
+  --img-to-title-gap: 16px;    /* exact distance from image bottom to title */
 }
 
 /* Base */
@@ -20,7 +20,7 @@ body{
 }
 
 /* =========================================================
-   HERO (PocketSteak-style, cyan)
+   HERO (PocketSteak-style, cyan) — single-line title
    ========================================================= */
 .hero{
   background: radial-gradient(1200px 600px at 20% -300px, rgba(0,229,255,.08), transparent 60%), #000;
@@ -32,7 +32,7 @@ body{
   margin: 0 auto;
   padding: clamp(28px, 6vw, 64px) 16px;
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto 1fr;   /* logo | title */
   gap: clamp(16px, 4vw, 48px);
   align-items: center;
 }
@@ -46,14 +46,12 @@ body{
   outline: 1px solid rgba(0,229,255,.35);
   box-shadow: 0 0 24px rgba(0,229,255,.25), inset 0 0 0 1px rgba(0,229,255,.1);
 }
-.hero-text{ display:flex; flex-direction:column; }
-
 .hero-title{
-  margin: 0 0 clamp(6px, 1.5vw, 12px);
+  margin: 0;
   font-weight: 900;
   line-height: .95;
-  /* Big like PocketSteak */
-  font-size: clamp(40px, 10vw, 160px);
+  font-size: clamp(40px, 10vw, 160px);  /* big like PocketSteak */
+  white-space: nowrap;                   /* keep on one line */
 
   /* Cyan gradient text + glow */
   background: linear-gradient(180deg, #e8faff 0%, #abf6ff 40%, #00e5ff 80%);
@@ -64,16 +62,10 @@ body{
     0 0 20px rgba(0,229,255,.25),
     0 0 60px rgba(0,229,255,.18);
 }
-.hero-sub{
-  margin: 0;
-  color: #cfe9ef;
-  font-size: clamp(16px, 3.2vw, 44px);
-  text-shadow: 0 0 10px rgba(0,229,255,.2);
-}
-
-/* Mobile: stack logo above text */
+/* Mobile: stack but keep title single-line by shrinking it */
 @media (max-width: 720px){
-  .hero-inner{ grid-template-columns: 1fr; justify-items: center; text-align:center; }
+  .hero-inner{ grid-template-columns: 1fr; justify-items:center; text-align:center; }
+  .hero-title{ font-size: clamp(32px, 12vw, 64px); }
 }
 
 /* =========================================================
@@ -98,6 +90,9 @@ body{
     0 0 0 1px rgba(0,229,255,.24),
     0 14px 40px rgba(0,0,0,.6);
   transition: transform .25s ease, box-shadow .25s ease;
+  display: grid;
+  grid-template-rows: auto auto;    /* image row + caption row */
+  row-gap: var(--img-to-title-gap); /* exact spacing to caption */
 }
 .art-item:hover{
   transform: translateY(-4px);
@@ -116,7 +111,7 @@ body{
   border-radius:10px;
   overflow:hidden;
 
-  /* exact distance to caption */
+  /* double-ensures the gap even if row-gap is overridden */
   margin-bottom: var(--img-to-title-gap) !important;
 }
 .art-item > a.thumb > img{
@@ -132,13 +127,13 @@ body{
 .art-item > img { width:100%; height:auto; display:block; }
 
 /* Captions */
-.item-info{ padding:0; text-align:center; }
+.item-info{ padding:0; text-align:center; margin:0 !important; }
 .item-info h3, .item-info p{
   color:var(--main-cyan);
   text-shadow:0 0 2px var(--accent-glow), 0 0 10px rgba(0,229,255,.18);
 }
-.item-info h3{ margin:0 0 6px; }
-.item-info p { margin:0; }
+.item-info h3{ margin:0 0 6px !important; }
+.item-info p { margin:0 !important; }
 
 /* =========================================================
    LIGHTBOX / BUTTON / FOOTER

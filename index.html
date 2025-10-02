@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Vanta Ray Art</title>
 
   <!-- Favicon (optional) -->
   <link rel="icon" type="image/png" href="assets/Vanta_Ray_Logo.png" />
 
   <!-- cache-bust -->
-  <link rel="stylesheet" href="css/styles.css?v=11" />
+  <link rel="stylesheet" href="css/styles.css?v=12" />
 </head>
 <body>
-  <!-- HERO (PocketSteak-style, cyan theme) -->
+  <!-- HERO (PocketSteak-style, cyan, single-line title) -->
   <header class="hero">
     <div class="hero-inner">
       <img
@@ -21,10 +21,7 @@
         alt="Vanta Ray Art logo"
         width="240" height="240"
       />
-      <div class="hero-text">
-        <h1 class="hero-title">Vanta Ray Art</h1>
-        <p class="hero-sub">A collection of my work.</p>
-      </div>
+      <h1 class="hero-title">Vanta Ray Art</h1>
     </div>
   </header>
 
@@ -69,10 +66,10 @@
 
   <!-- Lightbox -->
   <div id="lightbox" class="lightbox">
-    <span class="close-btn">&times;</span>
+    <span class="close-btn" aria-label="Close image">&times;</span>
     <img class="lightbox-content" id="lightbox-image" alt="Enlarged Art View" />
     <div class="lightbox-caption">
-      <a id="etsy-link" href="#" target="_blank" class="etsy-button">Buy on Etsy</a>
+      <a id="etsy-link" href="#" target="_blank" rel="noopener" class="etsy-button">Buy on Etsy</a>
     </div>
   </div>
 
