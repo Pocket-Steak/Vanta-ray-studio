@@ -4,6 +4,8 @@
   --main-cyan: #00e5ff;                /* neon cyan */
   --accent-glow: #7af0ff;              /* soft outer glow cyan */
   --item-bg: rgba(0, 229, 255, 0.04);  /* slight cyan-tinted panel */
+
+  --img-to-title-gap: 14px;            /* <— change this to control spacing */
 }
 
 body {
@@ -30,7 +32,7 @@ header h1, header p {
     0 0 22px var(--accent-glow);
 }
 
-/* Grid */
+/* Gallery grid */
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -38,6 +40,9 @@ header h1, header p {
   padding: 20px;
   max-width: 1200px;
   margin: auto;
+
+  /* Prevent cards from stretching to the tallest in the row */
+  align-items: start;
 }
 
 /* Card */
@@ -51,8 +56,14 @@ header h1, header p {
   transition: transform 0.3s ease, box-shadow 0.3s ease, outline-color .3s ease;
   position: relative;
 
-  /* fixed inner padding so image isn't glued to the top/bottom */
+  /* Consistent inside padding */
   padding: 18px 16px 20px;
+
+  /* KEY: lock the gap between image and caption */
+  display: grid;
+  grid-template-rows: auto auto;   /* row 1 = image, row 2 = caption */
+  row-gap: var(--img-to-title-gap);
+  align-content: start;            /* ensure content stays at the top of the card */
 }
 .art-item:hover {
   transform: translateY(-5px) scale(1.03);
@@ -67,26 +78,23 @@ header h1, header p {
   display:block;
   position:relative;
   width:100%;
-  aspect-ratio: 1 / 1;       /* change to 1 / 1 for squares if you prefer */
+  aspect-ratio: 1 / 1;       /* use 4 / 5 for portraits, 1 / 1 for squares */
   overflow:hidden;
   border-radius:10px;
-
-  /* exact distance from image to caption */
-  margin-bottom: 14px;
 }
 .thumb img{
   position:absolute;
   inset:0;
   width:100%;
   height:100%;
-  object-fit:cover;          /* crops to fill uniformly */
+  object-fit:cover;
   object-position:center;
   border-radius:10px;
   outline: 1px solid rgba(0,229,255,.25);
   box-shadow: 0 8px 40px rgba(0,0,0,.5);
 }
 
-/* (Fallback rule for any non-thumb images elsewhere) */
+/* Fallback rule for non-thumb images (elsewhere) */
 .art-item img {
   width: 100%;
   height: auto;
@@ -105,7 +113,7 @@ header h1, header p {
 
 /* Lightbox */
 .lightbox {
-  display: none; /* hidden by default */
+  display: none;
   position: fixed;
   z-index: 1000;
   padding-top: 50px;
@@ -183,9 +191,7 @@ footer {
 }
 
 /* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; } to { opacity: 1; }
-}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes glow-pulse {
   0%, 100% { box-shadow: 0 0 22px var(--accent-glow), 0 0 60px rgba(0,229,255,.15); }
   50%      { box-shadow: 0 0 44px var(--accent-glow), 0 0 90px rgba(0,229,255,.22); }
