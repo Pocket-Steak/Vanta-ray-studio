@@ -5,7 +5,8 @@
   --accent-glow: #7af0ff;              /* soft outer glow cyan */
   --item-bg: rgba(0, 229, 255, 0.04);  /* slight cyan-tinted panel */
 
-  --img-to-title-gap: 14px;            /* <— change this to control spacing */
+  --thumb-aspect: 1 / 1;               /* 1/1 = square, change to 4/5 if preferred */
+  --img-to-title-gap: 18px;            /* EXACT distance from image bottom to title */
 }
 
 body {
@@ -40,9 +41,7 @@ header h1, header p {
   padding: 20px;
   max-width: 1200px;
   margin: auto;
-
-  /* Prevent cards from stretching to the tallest in the row */
-  align-items: start;
+  align-items: start; /* prevent cards stretching to tallest row mate */
 }
 
 /* Card */
@@ -56,14 +55,13 @@ header h1, header p {
   transition: transform 0.3s ease, box-shadow 0.3s ease, outline-color .3s ease;
   position: relative;
 
-  /* Consistent inside padding */
   padding: 18px 16px 20px;
 
-  /* KEY: lock the gap between image and caption */
+  /* make layout explicit: image row + caption row with fixed gap */
   display: grid;
-  grid-template-rows: auto auto;   /* row 1 = image, row 2 = caption */
+  grid-template-rows: auto auto;
   row-gap: var(--img-to-title-gap);
-  align-content: start;            /* ensure content stays at the top of the card */
+  align-content: start;
 }
 .art-item:hover {
   transform: translateY(-5px) scale(1.03);
@@ -73,28 +71,33 @@ header h1, header p {
     0 24px 70px rgba(0,229,255,.18);
 }
 
-/* Uniform thumbnail frame (same size for all images) */
-.thumb{
-  display:block;
-  position:relative;
-  width:100%;
-  aspect-ratio: 1 / 1;       /* use 4 / 5 for portraits, 1 / 1 for squares */
-  overflow:hidden;
-  border-radius:10px;
+/* Uniform thumbnail frame (applies to .thumb AND a fallback) */
+.art-item > a.thumb,
+.art-item > a:first-of-type {
+  display: block;
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--thumb-aspect);
+  overflow: hidden;
+  border-radius: 10px;
+  /* enforce the exact distance to caption even if something overrides grid-gap */
+  margin-bottom: var(--img-to-title-gap) !important;
 }
-.thumb img{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center;
-  border-radius:10px;
+
+.art-item > a.thumb > img,
+.art-item > a:first-of-type > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
   outline: 1px solid rgba(0,229,255,.25);
   box-shadow: 0 8px 40px rgba(0,0,0,.5);
 }
 
-/* Fallback rule for non-thumb images (elsewhere) */
+/* Fallback for any non-thumb images elsewhere */
 .art-item img {
   width: 100%;
   height: auto;
@@ -103,13 +106,13 @@ header h1, header p {
 }
 
 /* Captions */
-.item-info { padding: 0; text-align: center; }
+.item-info { padding: 0; text-align: center; margin: 0 !important; }
 .item-info h3, .item-info p {
   color: var(--main-cyan);
   text-shadow: 0 0 2px var(--accent-glow), 0 0 10px rgba(0,229,255,.18);
 }
-.item-info h3 { margin: 0 0 6px; }
-.item-info p  { margin: 0; }
+.item-info h3 { margin: 0 0 6px !important; }
+.item-info p  { margin: 0 !important; }
 
 /* Lightbox */
 .lightbox {
@@ -194,5 +197,3 @@ footer {
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes glow-pulse {
   0%, 100% { box-shadow: 0 0 22px var(--accent-glow), 0 0 60px rgba(0,229,255,.15); }
-  50%      { box-shadow: 0 0 44px var(--accent-glow), 0 0 90px rgba(0,229,255,.22); }
-}
