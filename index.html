@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -8,71 +8,104 @@
   <!-- Favicon (optional) -->
   <link rel="icon" type="image/png" href="assets/Vanta_Ray_Logo.png" />
 
-  <!-- cache-bust -->
-  <link rel="stylesheet" href="css/styles.css?v=12" />
+  <!-- Cache-bust your CSS as you iterate -->
+  <link rel="stylesheet" href="css/styles.css?v=13" />
 </head>
 <body>
-  <!-- HERO (PocketSteak-style, cyan, single-line title) -->
+  <!-- HERO: centered logo + single-line title -->
   <header class="hero">
-    <div class="hero-inner">
+    <div class="hero-inner" role="banner" aria-label="Vanta Ray Art">
       <img
         class="hero-logo"
         src="assets/Vanta_Ray_Logo.png"
         alt="Vanta Ray Art logo"
         width="240" height="240"
+        decoding="async"
       />
       <h1 class="hero-title">Vanta Ray Art</h1>
     </div>
   </header>
 
-  <main class="gallery">
+  <!-- GALLERY -->
+  <main class="gallery" id="gallery" aria-label="Artwork gallery">
     <!-- Art Piece 1 -->
-    <div class="art-item">
-      <a class="thumb" href="images/large/duck.jpg" data-lightbox="gallery" data-etsy-url="https://www.etsy.com/listing/DUCK-LINK">
-        <img src="images/thumbnails/duck.jpg" alt="A whimsical portrait of a duck." />
+    <article class="art-item">
+      <a
+        class="thumb"
+        href="images/large/duck.jpg"
+        data-lightbox="gallery"
+        data-etsy-url="https://www.etsy.com/listing/DUCK-LINK"
+      >
+        <img
+          src="images/thumbnails/duck.jpg"
+          alt="The Cosmic Duck — digital painting of a whimsical duck."
+          loading="lazy"
+          width="400" height="300"
+        />
       </a>
       <div class="item-info">
-        <h3>The Cosmic Duck</h3>
-        <p>Digital Painting, 2024</p>
+        <h3 class="item-title">The Cosmic Duck</h3>
+        <p class="item-meta">Digital Painting, 2024</p>
       </div>
-    </div>
+    </article>
 
     <!-- Art Piece 2 -->
-    <div class="art-item">
-      <a class="thumb" href="images/large/heyhey.jpg" data-lightbox="gallery" data-etsy-url="https://www.etsy.com/listing/HEYHEY-LINK">
-        <img src="images/thumbnails/heyhey.jpg" alt="A playful abstract piece." />
+    <article class="art-item">
+      <a
+        class="thumb"
+        href="images/large/heyhey.jpg"
+        data-lightbox="gallery"
+        data-etsy-url="https://www.etsy.com/listing/HEYHEY-LINK"
+      >
+        <img
+          src="images/thumbnails/heyhey.jpg"
+          alt="Hey Hey Blue — playful abstract in cool tones."
+          loading="lazy"
+          width="400" height="300"
+        />
       </a>
       <div class="item-info">
-        <h3>Hey Hey Blue</h3>
-        <p>Acrylic on Canvas, 2023</p>
+        <h3 class="item-title">Hey Hey Blue</h3>
+        <p class="item-meta">Acrylic on Canvas, 2023</p>
       </div>
-    </div>
+    </article>
 
     <!-- Art Piece 3 -->
-    <div class="art-item">
-      <a class="thumb" href="images/large/Witchking.jpg" data-lightbox="gallery" data-etsy-url="#">
-        <img src="images/thumbnails/Witchking.jpg" alt="A fierce depiction of a dark fantasy character." />
+    <article class="art-item">
+      <a
+        class="thumb"
+        href="images/large/Witchking.jpg"
+        data-lightbox="gallery"
+        data-etsy-url="#"
+      >
+        <img
+          src="images/thumbnails/Witchking.jpg"
+          alt="The Witch King — fierce dark fantasy portrait."
+          loading="lazy"
+          width="400" height="300"
+        />
       </a>
       <div class="item-info">
-        <h3>The Witch King</h3>
-        <p>Ink and Digital (Not For Sale)</p>
+        <h3 class="item-title">The Witch King</h3>
+        <p class="item-meta">Ink &amp; Digital (Not For Sale)</p>
       </div>
-    </div>
+    </article>
   </main>
 
-  <footer>
+  <footer class="site-footer">
     <p>&copy; 2025 Vanta Ray Art. All rights reserved.</p>
   </footer>
 
-  <!-- Lightbox -->
-  <div id="lightbox" class="lightbox">
-    <span class="close-btn" aria-label="Close image">&times;</span>
-    <img class="lightbox-content" id="lightbox-image" alt="Enlarged Art View" />
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="lightbox" hidden>
+    <button class="close-btn" aria-label="Close image">&times;</button>
+    <img class="lightbox-content" id="lightbox-image" alt="" />
     <div class="lightbox-caption">
-      <a id="etsy-link" href="#" target="_blank" rel="noopener" class="etsy-button">Buy on Etsy</a>
+      <a id="etsy-link" href="#" target="_blank" rel="noopener noreferrer" class="etsy-button">Buy on Etsy</a>
     </div>
   </div>
 
-  <script src="js/script.js"></script>
+  <!-- Scripts last; 'defer' prevents blocking and avoids white-screen flashes -->
+  <script src="js/script.js?v=13" defer></script>
 </body>
 </html>

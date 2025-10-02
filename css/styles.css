@@ -6,13 +6,18 @@
   --item-bg:rgba(0,229,255,.04);
 
   /* Gallery controls */
-  --thumb-aspect: 1 / 1;      /* 1/1 = square; change to 4/5 for portrait tiles */
-  --img-to-title-gap: 16px;    /* exact distance from image bottom to title */
+  --thumb-aspect: 1 / 1;      /* 1/1 = square; try 4/5 or 3/2 if you prefer */
+  --img-to-title-gap: 16px;    /* distance from image bottom to title */
+
+  /* Layout */
+  --page-max:1200px;           /* keeps hero width == gallery width */
 }
 
 /* Base */
+*{ box-sizing:border-box }
+html,body{ height:100% }
 body{
-  font-family: Arial, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background: var(--bg-color);
   color: var(--text-color);
   margin:0;
@@ -23,23 +28,22 @@ body{
    HERO (centered group, same width as gallery)
    ========================================================= */
 .hero{
-  background: radial-gradient(1200px 600px at 20% -300px, rgba(0,229,255,.08), transparent 60%), #000;
+  background:
+    radial-gradient(1200px 600px at 20% -300px, rgba(0,229,255,.08), transparent 60%),
+    #000;
   border-bottom:1px solid rgba(0,229,255,.18);
   box-shadow: 0 0 22px rgba(122,240,255,.22), 0 0 60px rgba(0,229,255,.10);
 }
-
-/* Same max width & side padding as the gallery, contents centered */
 .hero-inner{
-  max-width: 1200px;                 /* matches .gallery max-width */
+  max-width: var(--page-max);
   margin: 0 auto;
-  padding: clamp(28px, 6vw, 64px) 20px;  /* side padding = 20px to align with gallery */
+  padding: clamp(28px, 6vw, 64px) 20px;
   display: grid;
-  grid-template-columns: auto auto;  /* logo | title sized to content */
+  grid-template-columns: auto auto;  /* logo | title */
   gap: clamp(16px, 4vw, 48px);
   justify-content: center;           /* center the pair as a group */
   align-items: center;
 }
-
 .hero-logo{
   width: clamp(96px, 18vw, 260px);
   height: clamp(96px, 18vw, 260px);
@@ -50,13 +54,12 @@ body{
   outline: 1px solid rgba(0,229,255,.35);
   box-shadow: 0 0 24px rgba(0,229,255,.25), inset 0 0 0 1px rgba(0,229,255,.1);
 }
-
 .hero-title{
   margin: 0;
   font-weight: 900;
   line-height: .95;
   font-size: clamp(40px, 10vw, 160px);
-  white-space: nowrap;               /* keep on one line */
+  white-space: nowrap;               /* keep on one line on wide screens */
   text-align: center;
 
   /* Cyan gradient text + glow */
@@ -68,15 +71,13 @@ body{
     0 0 20px rgba(0,229,255,.25),
     0 0 60px rgba(0,229,255,.18);
 }
-
-/* Mobile: stack logo above title and shrink to fit */
 @media (max-width: 720px){
   .hero-inner{
     grid-template-columns: 1fr;
     justify-items: center;
     text-align: center;
   }
-  .hero-title{ font-size: clamp(32px, 12vw, 64px); }
+  .hero-title{ font-size: clamp(32px, 12vw, 64px); white-space: normal; }
 }
 
 /* =========================================================
@@ -87,8 +88,8 @@ body{
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap:20px;
   padding:20px;
-  max-width:1200px;
-  margin:24px auto;
+  max-width:var(--page-max);
+  margin:24px auto 64px;
   align-items:start; /* keep each card’s height independent */
 }
 
@@ -96,14 +97,14 @@ body{
 .art-item{
   background:var(--item-bg);
   border-radius:12px;
-  padding:16px;              /* space inside the card */
+  padding:16px;
   box-shadow:
     0 0 0 1px rgba(0,229,255,.24),
     0 14px 40px rgba(0,0,0,.6);
   transition: transform .25s ease, box-shadow .25s ease;
-  display: grid;
-  grid-template-rows: auto auto;    /* image row + caption row */
-  row-gap: var(--img-to-title-gap); /* exact spacing to caption */
+  display:grid;
+  grid-template-rows:auto auto;      /* image row + caption row */
+  row-gap: var(--img-to-title-gap);  /* exact spacing to caption */
 }
 .art-item:hover{
   transform: translateY(-4px);
@@ -121,9 +122,7 @@ body{
   aspect-ratio: var(--thumb-aspect);
   border-radius:10px;
   overflow:hidden;
-
-  /* double-ensures the gap even if row-gap is overridden */
-  margin-bottom: var(--img-to-title-gap) !important;
+  margin-bottom: var(--img-to-title-gap) !important; /* double-ensure spacing */
 }
 .art-item > a.thumb > img{
   position:absolute; inset:0;
@@ -135,32 +134,43 @@ body{
 }
 
 /* Fallback for any non-thumb images directly inside card */
-.art-item > img { width:100%; height:auto; display:block; }
+.art-item > img{ width:100%; height:auto; display:block }
 
 /* Captions */
-.item-info{ padding:0; text-align:center; margin:0 !important; }
+.item-info{ padding:0; text-align:center; margin:0 !important }
+.item-title{ margin:0 0 6px !important }
+.item-meta{ margin:0 !important }
 .item-info h3, .item-info p{
   color:var(--main-cyan);
   text-shadow:0 0 2px var(--accent-glow), 0 0 10px rgba(0,229,255,.18);
 }
-.item-info h3{ margin:0 0 6px !important; }
-.item-info p { margin:0 !important; }
 
 /* =========================================================
    LIGHTBOX / BUTTON / FOOTER
    ========================================================= */
+/* Works with <div class="lightbox" hidden> from HTML */
+.lightbox[hidden]{ display:none }
+
 .lightbox{
-  display:none; position:fixed; inset:0; z-index:1000;
-  padding-top:50px; overflow:auto;
-  background:rgba(0,10,12,.92); backdrop-filter: blur(4px);
+  position:fixed; inset:0; z-index:1000;
+  padding:24px; display:flex; align-items:center; justify-content:center;
+  background:rgba(0,10,12,.92);
+  backdrop-filter: blur(4px);
 }
 .lightbox-content{
-  margin:auto; display:block; width:80%; max-width:900px;
-  border-radius:12px; outline:2px solid rgba(0,229,255,.55);
-  box-shadow:0 0 0 6px rgba(0,229,255,.08), 0 28px 100px rgba(0,229,255,.25), 0 40px 80px rgba(0,0,0,.6);
+  max-width:min(94vw, var(--page-max));
+  max-height:80vh;
+  display:block;
+  border-radius:12px;
+  outline:2px solid rgba(0,229,255,.55);
+  box-shadow:0 0 0 6px rgba(0,229,255,.08),
+             0 28px 100px rgba(0,229,255,.25),
+             0 40px 80px rgba(0,0,0,.6);
 }
-.lightbox-caption{ text-align:center; color:var(--text-color); padding:10px 0; }
-
+.lightbox-caption{
+  position:absolute; bottom:22px; left:0; right:0;
+  text-align:center; color:var(--text-color);
+}
 .etsy-button{
   background:var(--main-cyan); color:#052026;
   padding:10px 20px; border-radius:999px; text-decoration:none; font-weight:700;
@@ -173,14 +183,15 @@ body{
   transform: translateY(-1px) scale(1.04);
   box-shadow:0 0 14px var(--accent-glow), 0 0 36px rgba(122,240,255,.45);
 }
-
 .close-btn{
-  position:absolute; top:15px; right:35px;
+  position:absolute; top:12px; right:16px;
   color:var(--text-color); font-size:40px; font-weight:bold; cursor:pointer;
   text-shadow:0 0 10px var(--main-cyan);
+  background:none; border:none; line-height:1;
 }
 
-footer{
+/* Footer */
+.site-footer, footer{
   text-align:center; padding:20px; background:#000;
   border-top:1px solid rgba(0,229,255,.25); color:#b7d7de;
 }
