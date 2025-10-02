@@ -1,199 +1,52 @@
-:root {
-  --bg-color: #06080b;                 /* deep black-blue */
-  --text-color: #e8faff;               /* icy white/cyan */
-  --main-cyan: #00e5ff;                /* neon cyan */
-  --accent-glow: #7af0ff;              /* soft outer glow cyan */
-  --item-bg: rgba(0, 229, 255, 0.04);  /* slight cyan-tinted panel */
-
-  --thumb-aspect: 1 / 1;               /* 1/1 = square, change to 4/5 if preferred */
-  --img-to-title-gap: 18px;            /* EXACT distance from image bottom to title */
-}
-
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  margin: 0;
-  line-height: 1.6;
-}
-
-/* Header */
-header {
-  text-align: center;
-  padding: 40px 20px;
-  background-color: #000;
-  box-shadow: 0 0 22px var(--accent-glow), 0 0 60px rgba(0,229,255,.15);
-  animation: glow-pulse 3s infinite ease-in-out;
+/* === Brand bar (PocketSteak-style, cyan theme) === */
+.site-header{
+  background:#000;
+  padding: 14px 0;
   border-bottom: 1px solid rgba(0,229,255,.18);
+  box-shadow: 0 0 22px rgba(122,240,255,.25), 0 0 60px rgba(0,229,255,.12);
 }
-header h1, header p {
+.header-wrap{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-radius: 16px;
+
+  /* subtle cyan “glass” bar */
+  background: linear-gradient(180deg, rgba(0,229,255,.06), rgba(0,229,255,.03));
+  outline: 1px solid rgba(0,229,255,.18);
+  box-shadow:
+    inset 0 0 0 1px rgba(0,229,255,.06),
+    0 12px 50px rgba(0,0,0,.45),
+    0 0 40px rgba(0,229,255,.12);
+}
+.brand-logo{
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  background: #061014;
+  border-radius: 12px;
+  padding: 6px;
+
+  outline: 1px solid rgba(0,229,255,.35);
+  box-shadow: 0 0 18px rgba(0,229,255,.24);
+}
+.brand-copy{ display:flex; flex-direction:column; }
+.brand-title{
+  margin: 0;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--text-color);
+  letter-spacing: .3px;
   text-shadow:
     0 0 6px var(--text-color),
-    0 0 12px var(--main-cyan),
-    0 0 22px var(--accent-glow);
+    0 0 14px var(--main-cyan),
+    0 0 28px var(--accent-glow);
 }
-
-/* Gallery grid */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  padding: 20px;
-  max-width: 1200px;
-  margin: auto;
-  align-items: start; /* prevent cards stretching to tallest row mate */
-}
-
-/* Card */
-.art-item {
-  background-color: var(--item-bg);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow:
-    0 0 0 1px rgba(0,229,255,.25),
-    0 14px 40px rgba(0,0,0,.6);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, outline-color .3s ease;
-  position: relative;
-
-  padding: 18px 16px 20px;
-
-  /* make layout explicit: image row + caption row with fixed gap */
-  display: grid;
-  grid-template-rows: auto auto;
-  row-gap: var(--img-to-title-gap);
-  align-content: start;
-}
-.art-item:hover {
-  transform: translateY(-5px) scale(1.03);
-  box-shadow:
-    0 0 0 1px rgba(0,229,255,.65),
-    0 0 30px rgba(0,229,255,.25),
-    0 24px 70px rgba(0,229,255,.18);
-}
-
-/* Uniform thumbnail frame (applies to .thumb AND a fallback) */
-.art-item > a.thumb,
-.art-item > a:first-of-type {
-  display: block;
-  position: relative;
-  width: 100%;
-  aspect-ratio: var(--thumb-aspect);
-  overflow: hidden;
-  border-radius: 10px;
-  /* enforce the exact distance to caption even if something overrides grid-gap */
-  margin-bottom: var(--img-to-title-gap) !important;
-}
-
-.art-item > a.thumb > img,
-.art-item > a:first-of-type > img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 10px;
-  outline: 1px solid rgba(0,229,255,.25);
-  box-shadow: 0 8px 40px rgba(0,0,0,.5);
-}
-
-/* Fallback for any non-thumb images elsewhere */
-.art-item img {
-  width: 100%;
-  height: auto;
-  display: block;
-  cursor: pointer;
-}
-
-/* Captions */
-.item-info { padding: 0; text-align: center; margin: 0 !important; }
-.item-info h3, .item-info p {
-  color: var(--main-cyan);
-  text-shadow: 0 0 2px var(--accent-glow), 0 0 10px rgba(0,229,255,.18);
-}
-.item-info h3 { margin: 0 0 6px !important; }
-.item-info p  { margin: 0 !important; }
-
-/* Lightbox */
-.lightbox {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  padding-top: 50px;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  overflow: auto;
-  background-color: rgba(0,10,12,0.92);
-  backdrop-filter: blur(4px);
-  animation: fadeIn 0.5s;
-  border: 0;
-}
-.lightbox-content {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 900px;
-  border-radius: 12px;
-  outline: 2px solid rgba(0,229,255,.55);
-  box-shadow:
-    0 0 0 6px rgba(0,229,255,.08),
-    0 28px 100px rgba(0,229,255,.25),
-    0 40px 80px rgba(0,0,0,.6);
-}
-.lightbox-caption {
-  text-align: center;
-  color: var(--text-color);
-  padding: 10px 0;
-}
-
-/* CTA button */
-.etsy-button {
-  background-color: var(--main-cyan);
-  color: #052026;
-  padding: 10px 20px;
-  text-decoration: none;
-  border-radius: 999px;
-  font-weight: 700;
-  letter-spacing: .2px;
-  box-shadow:
-    0 0 10px var(--main-cyan),
-    0 0 24px rgba(0,229,255,.35);
-  transition: background-color 0.3s, transform 0.3s, box-shadow .3s;
-  margin-top: 10px;
-  display: inline-block;
-  border: 1px solid rgba(0,229,255,.55);
-}
-.etsy-button:hover {
-  background-color: var(--accent-glow);
-  transform: translateY(-1px) scale(1.04);
-  box-shadow:
-    0 0 14px var(--accent-glow),
-    0 0 36px rgba(122,240,255,.45);
-}
-
-/* Close */
-.close-btn {
-  position: absolute;
-  top: 15px; right: 35px;
-  color: var(--text-color);
-  font-size: 40px;
-  font-weight: bold;
-  transition: 0.3s;
-  cursor: pointer;
-  text-shadow: 0 0 10px var(--main-cyan);
-}
-.close-btn:hover { color: var(--main-cyan); }
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 20px;
-  background-color: #000;
-  border-top: 1px solid rgba(0,229,255,.25);
+.brand-tag{
+  margin: 2px 0 0;
   color: #b7d7de;
 }
-
-/* Animations */
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 22px var(--accent-glow), 0 0 60px rgba(0,229,255,.15); }
