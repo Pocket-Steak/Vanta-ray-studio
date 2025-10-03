@@ -1,0 +1,4 @@
+echo vantarayart.com > CNAME
+git add CNAME
+git commit -m "Add CNAME for custom domain"
+git push
