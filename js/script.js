@@ -9,7 +9,7 @@ const ART = [
   { f: 'product_0763.jpg', title: 'Cynthia', medium: 'Painted, wood frame', w: 260, mt: 60, rot: 2.5, listing: '' },
   { f: 'product_0828.jpg', title: 'The Cottage', medium: 'Acrylic on canvas', w: 360, mt: 0, rot: -1, listing: '' },
   { v: 'product_0806', title: 'Nope. Deck Box', medium: 'Hand-painted', w: 220, mt: 90, rot: -3, listing: '' },
-  { f: 'product_0773.jpg', title: 'Good Guys', medium: 'Layered laser', w: 280, mt: 40, rot: 2, listing: '' },
+  { f: 'product_0773.jpg', title: 'Good Guys', medium: 'Painted box', w: 280, mt: 40, rot: 2, listing: '' },
   { f: 'product_0835.jpg', title: 'Galaxy Dessert', medium: 'Acrylic on canvas', w: 270, mt: 120, rot: -1.5, listing: '' },
   { f: 'product_0794.jpg', title: 'Flash Box', medium: 'Hand-painted keepsake box', w: 340, mt: 20, rot: 1, listing: '' },
   { f: 'product_0770.jpg', title: 'Junkrat', medium: 'Painted, wood frame', w: 260, mt: 100, rot: 3, listing: '' },

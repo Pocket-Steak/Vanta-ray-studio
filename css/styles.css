@@ -136,6 +136,7 @@ img{ max-width:100% }
 .make-photo{ width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:10px }
 .make-photo-sq{ aspect-ratio:1/1 }
 .make-photo-wide{ aspect-ratio:16/9; grid-column:span 2 }
+.make-photo-nat{ aspect-ratio:auto; height:auto }
 .tilt-l{ transform:rotate(-2deg) }
 .tilt-r{ transform:rotate(2deg) translateY(-30px) }
 .photo-soon{
