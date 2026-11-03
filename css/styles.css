@@ -171,7 +171,7 @@ img{ max-width:100% }
   box-shadow:0 24px 50px rgba(0,0,0,.55); transition:box-shadow .3s;
 }
 .wall-frame:hover{ box-shadow:0 0 0 1px var(--cyan),0 0 40px rgba(47,227,242,.4) }
-.wall-frame img{ width:100%; display:block; border-radius:2px; pointer-events:none }
+.wall-frame img,.wall-frame video{ width:100%; display:block; border-radius:2px; pointer-events:none }
 .wall-caption{ display:flex; justify-content:space-between; align-items:flex-end; gap:12px; padding-left:4px }
 .wall-caption-text{ display:flex; flex-direction:column; gap:2px }
 .wall-title{ font-family:'Caveat Brush',cursive; font-size:24px; line-height:1.1 }
