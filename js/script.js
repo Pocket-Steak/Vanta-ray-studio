@@ -5,13 +5,13 @@ const SHOP = 'https://www.etsy.com/shop/VantaRayArt';
 // listing: paste each piece's Etsy listing URL; empty falls back to the shop page
 const ART = [
   { f: 'product_0757.jpg', title: 'Kris', medium: 'Acrylic on canvas', w: 280, mt: 30, rot: -2, listing: '' },
-  { v: 'product_0819', title: 'D.Va', medium: 'Acrylic on canvas', w: 400, mt: 110, rot: 1.5, listing: '' },
+  { f: 'product_0821.jpg', title: 'D.Va', medium: 'Acrylic on canvas', w: 400, mt: 110, rot: 1.5, listing: '' },
   { f: 'product_0763.jpg', title: 'Cynthia', medium: 'Painted, wood frame', w: 260, mt: 60, rot: 2.5, listing: '' },
   { f: 'product_0828.jpg', title: 'The Cottage', medium: 'Acrylic on canvas', w: 360, mt: 0, rot: -1, listing: '' },
   { v: 'product_0806', title: 'Nope. Deck Box', medium: 'Hand-painted', w: 220, mt: 90, rot: -3, listing: '' },
   { f: 'product_0773.jpg', title: 'Good Guys', medium: 'Layered laser', w: 280, mt: 40, rot: 2, listing: '' },
   { f: 'product_0835.jpg', title: 'Galaxy Dessert', medium: 'Acrylic on canvas', w: 270, mt: 120, rot: -1.5, listing: '' },
-  { v: 'product_0808', title: 'Flash Box', medium: 'Hand-painted keepsake box', w: 380, mt: 20, rot: 1, listing: '' },
+  { f: 'product_0794.jpg', title: 'Flash Box', medium: 'Hand-painted keepsake box', w: 340, mt: 20, rot: 1, listing: '' },
   { f: 'product_0770.jpg', title: 'Junkrat', medium: 'Painted, wood frame', w: 260, mt: 100, rot: 3, listing: '' },
   { f: 'product_0804.jpg', title: 'Top Hat Pop', medium: 'Hand-painted wood', w: 220, mt: 10, rot: -2, listing: '' },
   { f: 'product_0792.jpg', title: 'Nope. Deck Box', medium: 'Inside view', w: 240, mt: 80, rot: 2, listing: '' },

@@ -135,6 +135,7 @@ img{ max-width:100% }
 .make-copy a{ font-weight:600; font-size:17px }
 .make-photo{ width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:10px }
 .make-photo-sq{ aspect-ratio:1/1 }
+.make-photo-wide{ aspect-ratio:16/9; grid-column:span 2 }
 .tilt-l{ transform:rotate(-2deg) }
 .tilt-r{ transform:rotate(2deg) translateY(-30px) }
 .photo-soon{
@@ -248,6 +249,7 @@ img{ max-width:100% }
   .hero-logo{ width:min(260px,70vw); margin:0 auto }
   .wall-hint{ display:none }
   .tilt-r{ transform:rotate(2deg) }
+  .make-photo-wide{ grid-column:auto }
 }
 
 @media (prefers-reduced-motion:reduce){
