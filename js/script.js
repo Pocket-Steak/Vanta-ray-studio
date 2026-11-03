@@ -18,7 +18,7 @@ const ART = [
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Accordion: hover (desktop) or tap opens one row at a time
+  // Accordion: click or tap opens one row at a time
   const items = [...document.querySelectorAll('.make-item')];
   const open = (item) => {
     items.forEach((it) => {
@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
   items.forEach((item) => {
     const head = item.querySelector('.make-head');
     head.addEventListener('click', () => open(item));
-    head.addEventListener('mouseenter', () => { if (matchMedia('(hover:hover)').matches) open(item); });
   });
 
   // Wall
