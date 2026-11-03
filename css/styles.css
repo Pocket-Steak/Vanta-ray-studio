@@ -114,25 +114,25 @@ img{ max-width:100% }
 .make-item:last-child{ border-bottom:1px solid var(--line) }
 .make-head{
   all:unset; cursor:pointer; box-sizing:border-box; width:100%;
-  display:flex; align-items:center; gap:clamp(16px,3vw,48px); padding:22px 0; flex-wrap:wrap;
+  display:flex; align-items:center; gap:clamp(12px,2vw,32px); padding:16px 0; flex-wrap:wrap;
 }
 .make-head:focus-visible{ outline:2px solid var(--cyan); outline-offset:4px }
-.make-num{ font-family:Syncopate,sans-serif; font-size:13px; color:var(--cyan-2); width:40px }
 .make-name{
-  flex:1; font-weight:800; font-size:clamp(34px,5vw,76px); letter-spacing:-.04em; line-height:.95;
-  color:var(--text); transition:color .3s, text-shadow .3s;
+  flex:1; font-weight:600; font-size:clamp(22px,2.4vw,32px); letter-spacing:-.02em; line-height:1.1;
+  color:var(--text); transition:color .3s;
 }
-.make-item.is-open .make-name{ color:var(--cyan); text-shadow:0 0 40px rgba(47,227,242,.5) }
-.make-tags{ font-size:26px; transform:none }
+.make-head:hover .make-name{ color:var(--cyan-2) }
+.make-item.is-open .make-name{ color:var(--cyan) }
+.make-tags{ font-size:22px; transform:none }
 .make-body{
   display:none;
   gap:24px; padding:4px 0 36px; align-items:flex-end; flex-wrap:wrap;
 }
 .make-item.is-open .make-body{ display:flex }
-.make-copy{ flex:1 1 260px; display:flex; flex-direction:column; gap:18px; padding-right:20px }
+.make-copy{ flex:0 1 280px; display:flex; flex-direction:column; gap:18px; padding-right:20px }
 .make-copy p{ margin:0; font-size:18px; line-height:1.5; color:var(--text-2); text-wrap:pretty }
 .make-copy a{ font-weight:600; font-size:17px }
-.make-photo{ height:min(42vh,380px); width:auto; max-width:100%; object-fit:contain; border-radius:10px }
+.make-photo{ flex:1 1 0; min-width:0; width:100%; height:min(60vh,540px); object-fit:contain; border-radius:10px }
 .tilt-l{ transform:rotate(-2deg) }
 .tilt-r{ transform:rotate(2deg) translateY(-16px) }
 .photo-soon{
@@ -247,7 +247,8 @@ img{ max-width:100% }
   .wall-hint{ display:none }
   .tilt-r{ transform:rotate(2deg) }
   .make-body{ gap:14px }
-  .make-photo{ width:calc(50% - 7px); height:auto }
+  .make-copy{ flex-basis:100% }
+  .make-photo{ flex:none; width:calc(50% - 7px); height:auto }
 }
 
 @media (prefers-reduced-motion:reduce){
