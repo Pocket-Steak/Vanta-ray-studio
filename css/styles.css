@@ -135,8 +135,9 @@ img{ max-width:100% }
 .make-copy p{ margin:0; font-size:18px; line-height:1.5; color:var(--text-2); text-wrap:pretty }
 .make-copy a{ font-weight:600; font-size:17px }
 .make-photo{
-  flex:1 1 0; min-width:0; width:100%; height:min(60vh,540px); object-fit:contain; border-radius:10px;
-  filter:var(--float); animation:float 7s ease-in-out infinite;
+  flex:0 0 auto; width:auto; height:auto; max-width:calc(50% - 170px); max-height:min(56vh,480px);
+  border:10px solid #fff; border-radius:18px; background:#fff;
+  box-shadow:var(--float-box); animation:float 7s ease-in-out infinite;
 }
 .make-photo.tilt-r{ animation-delay:-3.5s }
 @keyframes float{ 0%,100%{ translate:0 0 } 50%{ translate:0 -10px } }
@@ -172,10 +173,11 @@ img{ max-width:100% }
 }
 .wall-piece{ flex:none; display:flex; flex-direction:column; gap:12px }
 .wall-frame{
-  display:block; filter:var(--float); transition:filter .3s, transform .3s;
+  display:block; border:8px solid #fff; border-radius:14px; background:#fff; overflow:hidden;
+  box-shadow:var(--float-box); transition:box-shadow .3s, transform .3s;
 }
-.wall-frame:hover{ transform:translateY(-8px); filter:drop-shadow(0 50px 40px rgba(74,56,30,.24)) drop-shadow(0 10px 14px rgba(74,56,30,.14)) }
-.wall-frame img,.wall-frame video{ width:100%; display:block; pointer-events:none }
+.wall-frame:hover{ transform:translateY(-6px); box-shadow:0 56px 70px -20px rgba(74,56,30,.34),0 14px 24px -8px rgba(74,56,30,.18) }
+.wall-frame img,.wall-frame video{ width:100%; display:block; border-radius:6px; pointer-events:none }
 .wall-caption{ display:flex; justify-content:space-between; align-items:flex-end; gap:12px; padding-left:4px }
 .wall-caption-text{ display:flex; flex-direction:column; gap:2px }
 .wall-title{ font-family:'Caveat Brush',cursive; font-size:24px; line-height:1.1 }
@@ -252,7 +254,7 @@ img{ max-width:100% }
   .tilt-r{ transform:rotate(2deg) }
   .make-body{ gap:14px }
   .make-copy{ flex-basis:100% }
-  .make-photo{ flex:none; width:calc(50% - 7px); height:auto }
+  .make-photo{ flex:none; width:calc(50% - 7px); max-width:none; height:auto; border-width:6px; border-radius:12px }
 }
 
 @media (prefers-reduced-motion:reduce){
