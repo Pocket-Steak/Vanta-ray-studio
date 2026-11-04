@@ -172,11 +172,10 @@ img{ max-width:100% }
 }
 .wall-piece{ flex:none; display:flex; flex-direction:column; gap:12px }
 .wall-frame{
-  display:block; padding:10px; background:var(--card); border-radius:4px;
-  box-shadow:var(--float-box); transition:box-shadow .3s, transform .3s;
+  display:block; filter:var(--float); transition:filter .3s, transform .3s;
 }
-.wall-frame:hover{ transform:translateY(-6px); box-shadow:0 56px 70px -20px rgba(74,56,30,.34),0 14px 24px -8px rgba(74,56,30,.18) }
-.wall-frame img,.wall-frame video{ width:100%; display:block; border-radius:2px; pointer-events:none }
+.wall-frame:hover{ transform:translateY(-8px); filter:drop-shadow(0 50px 40px rgba(74,56,30,.24)) drop-shadow(0 10px 14px rgba(74,56,30,.14)) }
+.wall-frame img,.wall-frame video{ width:100%; display:block; pointer-events:none }
 .wall-caption{ display:flex; justify-content:space-between; align-items:flex-end; gap:12px; padding-left:4px }
 .wall-caption-text{ display:flex; flex-direction:column; gap:2px }
 .wall-title{ font-family:'Caveat Brush',cursive; font-size:24px; line-height:1.1 }

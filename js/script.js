@@ -46,8 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
     piece.innerHTML = `
       <a class="wall-frame" href="${url}" target="_blank" rel="noopener" draggable="false">
         ${a.v
-          ? `<video src="videos/${a.v}.mp4" poster="videos/${a.v}.jpg" autoplay muted loop playsinline preload="metadata" aria-label="${a.title}"></video>`
-          : `<img src="images/thumbnails/${encodeURI(a.f)}" alt="${a.title}" loading="lazy" draggable="false">`}
+          ? `<video poster="videos/cutouts/${a.v}.webp" autoplay muted loop playsinline preload="metadata" aria-label="${a.title}">
+               <source src="videos/cutouts/${a.v}.mov" type='video/mp4; codecs="hvc1"'>
+               <source src="videos/cutouts/${a.v}.webm" type="video/webm">
+             </video>`
+          : `<img src="images/cutouts/thumbs/${a.f.replace(/\.jpg$/, '.webp')}" alt="${a.title}" loading="lazy" draggable="false">`}
       </a>
       <div class="wall-caption">
         <div class="wall-caption-text">
