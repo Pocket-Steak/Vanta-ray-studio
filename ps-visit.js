@@ -6,7 +6,9 @@
  *
  * - Each browser gets a random id (localStorage "ps_vid"); nothing else is stored on the device.
  * - Who: a signed-in Supabase user is read from the app's own session (localStorage or the
- *   sb-*-auth-token cookie): user id + name or email. Other sign-ins call PSVisit.identify({id, label}).
+ *   sb-*-auth-token cookie): user id + name or email, re-checked every 15 s so a sign-in mid-visit
+ *   counts. Other sign-ins (or httpOnly cookies) call PSVisit.identify({id, label}). The person is
+ *   tied to this browser, so its earlier anonymous views count as theirs too.
  * - Each page (including single-page-app route changes) is one view; time counts only while the
  *   tab is visible, sent every 15 s and when the page is left (sendBeacon survives closing the tab).
  * - Only the path is sent (no query string or hash, which can hold tokens). Off on localhost.
@@ -20,8 +22,12 @@
   var APP = me && me.getAttribute('data-app');
   var host = location.hostname;
   var off = !APP || navigator.webdriver || /^(localhost|127\.0\.0\.1|\[::1\]|0\.0\.0\.0)$|\.local$/.test(host) && !window.PS_VISIT_DEV;
-  var who = null, view = null, secs = 0, sent = 0, path = null, starting = false;
-  window.PSVisit = { identify: function (u) { if (u && u.id) who = { id: String(u.id), label: u.label ? String(u.label) : null }; } };
+  var who = null, told = null, view = null, secs = 0, sent = 0, path = null, starting = false;
+  window.PSVisit = { identify: function (u) {
+    if (!u || !u.id) return;
+    who = { id: String(u.id), label: u.label ? String(u.label) : null };
+    if (!off) tell();
+  } };
   if (off) return;
 
   function device() {
@@ -79,6 +85,14 @@
         .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
     } catch (e) { return null; }
   }
+  // whoever is signed in, as soon as we know: tied to this browser (and its earlier views)
+  function tell() {
+    var u = sniff();
+    if (!u || (told && told.id === u.id && told.label === u.label)) return;
+    if (!view) return;   // sent once the current view has its id
+    told = u;
+    post({ op: 'who', app: APP, d: DEV, v: view, u: u });
+  }
   function flush(beacon) {
     if (view && secs > sent) { sent = secs; post({ op: 'ping', v: view, s: secs }, beacon); }
   }
@@ -90,7 +104,8 @@
     var mine = p, u = sniff();
     starting = true;
     var r = post({ op: 'start', app: APP, d: DEV, path: p, u: u || undefined });
-    if (r && r.then) r.then(function (d) { starting = false; if (d && d.v && path === mine) view = d.v; });
+    if (u) told = u;
+    if (r && r.then) r.then(function (d) { starting = false; if (d && d.v && path === mine) { view = d.v; tell(); } });
     else starting = false;
   }
 
@@ -103,7 +118,7 @@
   addEventListener('popstate', function () { setTimeout(start, 0); });
 
   setInterval(function () { if (document.visibilityState === 'visible' && (view || starting)) secs++; }, 1000);
-  setInterval(function () { flush(false); }, 15000);
+  setInterval(function () { flush(false); tell(); }, 15000);
   document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') flush(true); });
   addEventListener('pagehide', function () { flush(true); });
 
