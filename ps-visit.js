@@ -6,9 +6,10 @@
  *
  * - Each browser gets a random id (localStorage "ps_vid"); nothing else is stored on the device.
  * - Who: a signed-in Supabase user is read from the app's own session (localStorage or the
- *   sb-*-auth-token cookie): user id + name or email, re-checked every 15 s so a sign-in mid-visit
- *   counts. Other sign-ins (or httpOnly cookies) call PSVisit.identify({id, label}). The person is
- *   tied to this browser, so its earlier anonymous views count as theirs too.
+ *   sb-*-auth-token cookie) and its access token sent, so the visit function can ask that project who
+ *   it is (names are never taken on trust). Re-checked every 15 s so a sign-in mid-visit
+ *   counts. Other sign-ins (or httpOnly cookies) call PSVisit.identify({id, label}), kept as unconfirmed.
+ *   A browser's earlier anonymous views become the first person to sign in on it, never a later one.
  * - Each page (including single-page-app route changes) is one view; time counts only while the
  *   tab is visible, sent every 15 s and when the page is left (sendBeacon survives closing the tab).
  * - Only the path is sent (no query string or hash, which can hold tokens). Off on localhost.
@@ -50,10 +51,10 @@
       if (s.indexOf('base64-') === 0) { try { s = decodeURIComponent(escape(atob(s.slice(7).replace(/-/g, '+').replace(/_/g, '/')))); } catch (e) { return null; } }
       try { s = JSON.parse(s); } catch (e) { return null; }
     }
-    var u = s && (s.user || (s.currentSession && s.currentSession.user));
-    if (!u || !u.id) return null;
-    var m = u.user_metadata || {};
-    return { id: u.id, label: m.full_name || m.name || m.display_name || m.username || u.email || null };
+    var cs = s && (s.currentSession || s), u = cs && cs.user;
+    if (!u || !u.id || !cs.access_token) return null;
+    // the token goes to the visit function, which asks the app's Supabase project who it is
+    return { id: u.id, t: cs.access_token };
   }
   function sniff() {
     if (who) return who;
@@ -91,7 +92,7 @@
     if (!u || (told && told.id === u.id && told.label === u.label)) return;
     if (!view) return;   // sent once the current view has its id
     told = u;
-    post({ op: 'who', app: APP, d: DEV, v: view, u: u });
+    post({ op: 'who', app: APP, d: DEV, v: view, t: u.t || undefined, u: u.t ? undefined : u });
   }
   function flush(beacon) {
     if (view && secs > sent) { sent = secs; post({ op: 'ping', v: view, s: secs }, beacon); }
@@ -103,7 +104,7 @@
     path = p; view = null; secs = 0; sent = 0;
     var mine = p, u = sniff();
     starting = true;
-    var r = post({ op: 'start', app: APP, d: DEV, path: p, u: u || undefined });
+    var r = post({ op: 'start', app: APP, d: DEV, path: p, t: u && u.t || undefined, u: u && !u.t ? u : undefined });
     if (u) told = u;
     if (r && r.then) r.then(function (d) { starting = false; if (d && d.v && path === mine) { view = d.v; tell(); } });
     else starting = false;
